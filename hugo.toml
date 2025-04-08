@@ -1,4 +1,4 @@
-baseURL = 'https://nhistory.github.io/blog/'
+baseURL = 'https://nhistory.github.io/'
 languageCode = 'en-us'
 title = 'Sehwan Dev Blog'
 theme = 'paper'
