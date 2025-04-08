@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sehwan Dev Blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Sehwan Dev Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Apr 2024 23:01:07 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Achieving the 40% Reduction in Page Load Times</title>
+      <link>http://localhost:1313/posts/achieving-the-40-reduction-in-page-load-times/</link>
+      <pubDate>Sun, 07 Apr 2024 23:01:07 -0300</pubDate>
+      <guid>http://localhost:1313/posts/achieving-the-40-reduction-in-page-load-times/</guid>
+      <description>&lt;h1 id=&#34;initial-problem-the-yeti-dashboard-displaying-potentially-large-datasets-like-the-100k-transaction-records-mentioned-suffered-from-slow-initial-load-times-and-sluggish-interactions-this-was-due-to-a-combination-of-large-javascript-bundles-inefficient-data-fetching-and-unoptimized-rendering&#34;&gt;Initial Problem: The Yeti dashboard, displaying potentially large datasets (like the &amp;gt;100k transaction records mentioned), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.&lt;/h1&gt;&#xA;&lt;p&gt;Specific Actions Taken (Full-Stack Perspective):&lt;/p&gt;&#xA;&lt;p&gt;Leveraging Next.js App Router &amp;amp; Server Components:&lt;/p&gt;&#xA;&lt;p&gt;Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

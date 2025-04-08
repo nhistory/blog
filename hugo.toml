@@ -1,0 +1,34 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Sehwan Dev Blog'
+theme = 'paper'
+
+[services]
+  [services.disqus]
+    shortname = 'YOUR_DISQUS_SHORTNAME'     # use disqus comments
+
+[params]
+  # color style
+  color = 'linen'                           # linen, wheat, gray, light
+
+  # header social icons
+  github = 'nhistory'                 # github.com/YOUR_GITHUB_ID
+  linkedin = 'sehwann'             # linkedin.com/in/YOUR_LINKEDIN_ID
+
+  # home page profile
+  avatar = 'https://avatars.githubusercontent.com/u/39740066?v=4'                 # gravatar email or image url
+  name = 'Sehwan'
+  bio = 'Full Stack Developer'
+
+  # RTL supprot
+  direction = "ltr"                         # RTL support for Right-to-left languages
+
+  # giscus
+[params.giscus]
+  repo = 'nhistory/blog'                 # see https://giscus.app for more details
+  repoId = 'R_kgDOOVvc4g'
+  category = 'General'
+  categoryId = 'DIC_kwDOOVvc4s4Co4P4'
+  mapping = 'pathname'
+  theme = 'light'
+  lang = 'en'

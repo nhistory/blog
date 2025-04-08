@@ -1,0 +1,218 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Achieving the 40% Reduction in Page Load Times-Sehwan Dev Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Initial Problem: The Yeti dashboard, displaying potentially large datasets (like the &gt;100k transaction records mentioned), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.
+Specific Actions Taken (Full-Stack Perspective):
+Leveraging Next.js App Router &amp; Server Components:
+Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data)." />
+  <meta name="author" content="Sehwan" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/39740066?v=4" />
+
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" /><link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.145.0">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >Sehwan Dev Blog</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/nhistory"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sehwann"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Achieving the 40% Reduction in Page Load Times</h1><div class="text-xs antialiased opacity-60"><time>Apr 7, 2024</time></div></header>
+
+  <section><h1 id="initial-problem-the-yeti-dashboard-displaying-potentially-large-datasets-like-the-100k-transaction-records-mentioned-suffered-from-slow-initial-load-times-and-sluggish-interactions-this-was-due-to-a-combination-of-large-javascript-bundles-inefficient-data-fetching-and-unoptimized-rendering">Initial Problem: The Yeti dashboard, displaying potentially large datasets (like the &gt;100k transaction records mentioned), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.</h1>
+<p>Specific Actions Taken (Full-Stack Perspective):</p>
+<p>Leveraging Next.js App Router &amp; Server Components:</p>
+<p>Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data).</p>
+<p>Action: Refactored key dashboard sections using Next.js Server Components. Heavy data fetching logic for the initial view was moved to the server. This drastically reduced the amount of JavaScript shipped to the client for the initial render, as rendering logic and data fetching happened server-side. Used React Suspense with Server Components for better loading state handling during server-side data fetching.</p>
+<p>Impact: Reduced Time to Interactive (TTI) and First Contentful Paint (FCP).</p>
+<p>Optimizing Data Fetching &amp; Payload Size:</p>
+<p>Before: The API might have returned the entire large dataset (or a very large chunk) for the initial dashboard view, even if only a fraction was immediately visible.</p>
+<p>Action: Collaborated on API refinement (or implemented backend changes yourself, being full-stack). Introduced pagination and server-side filtering/sorting for the primary data tables/visualizations. The frontend now only requested the specific data needed for the current view (e.g., first 50 rows, data for the selected date range). Implemented backend caching for frequently requested, static-like data.</p>
+<p>Impact: Smaller network payloads, faster API response times perceived by the frontend.</p>
+<p>Code Splitting &amp; Lazy Loading Client Components:</p>
+<p>Before: Large charting libraries (e.g., Chart.js, D3) or complex UI components (like advanced data grids from MUI or other libraries) were bundled into the main client-side JavaScript, loading even if not immediately needed.</p>
+<p>Action: Utilized next/dynamic to dynamically import heavy client-side components (e.g., complex charts, modals, detailed view panels). These components were only loaded when the user interacted with the feature requiring them (e.g., clicking a button to open a detailed chart view).</p>
+<p>Impact: Reduced initial JavaScript bundle size, deferring the loading of non-critical code.</p>
+<p>Asset Optimization:</p>
+<p>Before: Large images or icons might not have been optimized. Custom CSS could have been bulky.</p>
+<p>Action: Ensured all images were served using next/image for automatic optimization (resizing, modern formats like WebP). Audited and optimized CSS, ensuring efficient use of MUI&rsquo;s styling solution (e.g., leveraging theme variables, minimizing overrides) and ensuring proper tree-shaking for MUI components to only include necessary styles/JS.</p>
+<p>Impact: Faster asset downloads, quicker rendering.</p>
+<p>Caching Strategies:</p>
+<p>Action: Fine-tuned Next.js caching. Leveraged Route Segment Config options in the App Router to apply appropriate caching (static rendering where possible, ISR for data that updates periodically, or dynamic rendering with server-side caching headers for personalized/highly dynamic data). Configured browser caching for static assets effectively.</p>
+<p>Impact: Faster subsequent page loads and navigations within the app.</p>
+<p>Combined Result: These combined efforts significantly reduced the amount of data transferred, the amount of JavaScript parsed and executed on the client, and the time spent waiting for server responses, leading to the measured 40% reduction in page load times.</p>
+</section>
+
+  <div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'YOUR_DISQUS_SHORTNAME';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script><div class="giscus mt-24"></div>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="nhistory/blog"
+    data-repo-id="R_kgDOOVvc4g"
+    data-category="General"
+    data-category-id="DIC_kwDOOVvc4s4Co4P4"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Sehwan Dev Blog</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>
