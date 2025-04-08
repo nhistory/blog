@@ -3,6 +3,10 @@ languageCode = 'en-us'
 title = 'Sehwan Dev Blog'
 theme = 'paper'
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
 [services]
   [services.disqus]
     shortname = 'YOUR_DISQUS_SHORTNAME'     # use disqus comments
