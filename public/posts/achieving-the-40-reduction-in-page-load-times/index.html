@@ -25,9 +25,12 @@
   
   <meta name="theme-color" />
 
-  <meta name="description" content="Initial Problem: The Yeti dashboard, displaying potentially large datasets (like the &gt;100k transaction records mentioned), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.
-Specific Actions Taken (Full-Stack Perspective):
+  <meta name="description" content="Initial Problem:
+The Yeti dashboard, displaying potentially large datasets (the &gt;100k transaction records), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.
+Actions Taken:
 Leveraging Next.js App Router &amp; Server Components:
+
+
 Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data)." />
   <meta name="author" content="Sehwan" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
 
@@ -54,7 +57,7 @@ Before: Significant portions of the dashboard might have been rendered client-si
     href="http://localhost:1313/apple-touch-icon.png"
   />
 
-  <meta name="generator" content="Hugo 0.145.0">
+  <meta name="generator" content="Hugo 0.146.1">
 </head>
 <body
     class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
@@ -151,28 +154,57 @@ Before: Significant portions of the dashboard might have been rendered client-si
   <header class="mb-14">
     <h1 class="my-0! pb-2.5">Achieving the 40% Reduction in Page Load Times</h1><div class="text-xs antialiased opacity-60"><time>Apr 7, 2024</time></div></header>
 
-  <section><h1 id="initial-problem-the-yeti-dashboard-displaying-potentially-large-datasets-like-the-100k-transaction-records-mentioned-suffered-from-slow-initial-load-times-and-sluggish-interactions-this-was-due-to-a-combination-of-large-javascript-bundles-inefficient-data-fetching-and-unoptimized-rendering">Initial Problem: The Yeti dashboard, displaying potentially large datasets (like the &gt;100k transaction records mentioned), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.</h1>
-<p>Specific Actions Taken (Full-Stack Perspective):</p>
-<p>Leveraging Next.js App Router &amp; Server Components:</p>
+  <section><h2 id="initial-problem">Initial Problem:</h2>
+<p>The Yeti dashboard, displaying potentially large datasets (the &gt;100k transaction records), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.</p>
+<h2 id="actions-taken">Actions Taken:</h2>
+<h3 id="leveraging-nextjs-app-router--server-components">Leveraging Next.js App Router &amp; Server Components:</h3>
+<ul>
+<li>
 <p>Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data).</p>
+</li>
+<li>
 <p>Action: Refactored key dashboard sections using Next.js Server Components. Heavy data fetching logic for the initial view was moved to the server. This drastically reduced the amount of JavaScript shipped to the client for the initial render, as rendering logic and data fetching happened server-side. Used React Suspense with Server Components for better loading state handling during server-side data fetching.</p>
+</li>
+<li>
 <p>Impact: Reduced Time to Interactive (TTI) and First Contentful Paint (FCP).</p>
-<p>Optimizing Data Fetching &amp; Payload Size:</p>
+</li>
+</ul>
+<h3 id="optimizing-data-fetching--payload-size">Optimizing Data Fetching &amp; Payload Size:</h3>
+<ul>
+<li>
 <p>Before: The API might have returned the entire large dataset (or a very large chunk) for the initial dashboard view, even if only a fraction was immediately visible.</p>
-<p>Action: Collaborated on API refinement (or implemented backend changes yourself, being full-stack). Introduced pagination and server-side filtering/sorting for the primary data tables/visualizations. The frontend now only requested the specific data needed for the current view (e.g., first 50 rows, data for the selected date range). Implemented backend caching for frequently requested, static-like data.</p>
+</li>
+<li>
+<p>Action: Collaborated on API refinement with backend developer. Introduced pagination and server-side filtering/sorting for the primary data tables/visualizations. The frontend now only requested the specific data needed for the current view (e.g., first 50 rows, data for the selected date range). Implemented backend caching for frequently requested, static-like data.</p>
+</li>
+<li>
 <p>Impact: Smaller network payloads, faster API response times perceived by the frontend.</p>
-<p>Code Splitting &amp; Lazy Loading Client Components:</p>
-<p>Before: Large charting libraries (e.g., Chart.js, D3) or complex UI components (like advanced data grids from MUI or other libraries) were bundled into the main client-side JavaScript, loading even if not immediately needed.</p>
+</li>
+</ul>
+<h3 id="code-splitting--lazy-loading-client-components">Code Splitting &amp; Lazy Loading Client Components:</h3>
+<ul>
+<li>
+<p>Before: Complex UI components (data grids from MUI) were bundled into the main client-side JavaScript, loading even if not immediately needed.</p>
+</li>
+<li>
 <p>Action: Utilized next/dynamic to dynamically import heavy client-side components (e.g., complex charts, modals, detailed view panels). These components were only loaded when the user interacted with the feature requiring them (e.g., clicking a button to open a detailed chart view).</p>
+</li>
+<li>
 <p>Impact: Reduced initial JavaScript bundle size, deferring the loading of non-critical code.</p>
-<p>Asset Optimization:</p>
-<p>Before: Large images or icons might not have been optimized. Custom CSS could have been bulky.</p>
-<p>Action: Ensured all images were served using next/image for automatic optimization (resizing, modern formats like WebP). Audited and optimized CSS, ensuring efficient use of MUI&rsquo;s styling solution (e.g., leveraging theme variables, minimizing overrides) and ensuring proper tree-shaking for MUI components to only include necessary styles/JS.</p>
-<p>Impact: Faster asset downloads, quicker rendering.</p>
-<p>Caching Strategies:</p>
-<p>Action: Fine-tuned Next.js caching. Leveraged Route Segment Config options in the App Router to apply appropriate caching (static rendering where possible, ISR for data that updates periodically, or dynamic rendering with server-side caching headers for personalized/highly dynamic data). Configured browser caching for static assets effectively.</p>
+</li>
+</ul>
+<h3 id="caching-strategies">Caching Strategies:</h3>
+<ul>
+<li>
+<p>Action: Fine-tuned Next.js caching. Leveraged Route Segment Config options in the App Router to apply appropriate caching (static rendering where possible, ISR(Incremental Static Regeneration) for data that updates periodically, or dynamic rendering with server-side caching headers for personalized/highly dynamic data). Configured browser caching for static assets effectively.</p>
+</li>
+<li>
 <p>Impact: Faster subsequent page loads and navigations within the app.</p>
+</li>
+<li>
 <p>Combined Result: These combined efforts significantly reduced the amount of data transferred, the amount of JavaScript parsed and executed on the client, and the time spent waiting for server responses, leading to the measured 40% reduction in page load times.</p>
+</li>
+</ul>
 </section>
 
   <div class="mt-24" id="disqus_thread"></div>
