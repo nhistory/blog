@@ -1,0 +1,270 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>How We Achieved a 35% API Performance Gain in Our PoC-Sehwan Dev Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Our project was a used car search and comparison platform. Being a PoC, it wasn&rsquo;t yet facing heavy user load. However, during our internal testing and validation phases, we hit a snag: certain API calls were unexpectedly sluggish under specific conditions. This wasn&rsquo;t ideal, even for a PoC, as it hampered testing efficiency and could misrepresent the potential user experience during demos. The goal was clear – we needed to optimize." />
+  <meta name="author" content="Sehwan" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/39740066?v=4" />
+
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" /><link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.146.1">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >Sehwan Dev Blog</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/nhistory"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sehwann"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">How We Achieved a 35% API Performance Gain in Our PoC</h1><div class="text-xs antialiased opacity-60"><time>Jan 13, 2023</time></div></header>
+
+  <section><p>Our project was a used car search and comparison platform. Being a PoC, it wasn&rsquo;t yet facing heavy user load. However, during our internal testing and validation phases, we hit a snag: certain API calls were unexpectedly sluggish under specific conditions. This wasn&rsquo;t ideal, even for a PoC, as it hampered testing efficiency and could misrepresent the potential user experience during demos. The goal was clear – we needed to optimize.</p>
+<h2 id="the-problem-sluggish-responses-under-specific-test-scenarios">The Problem: Sluggish Responses Under Specific Test Scenarios</h2>
+<p>The main culprit was our primary search API. While simple searches were fast, we discovered that combining multiple specific filters – for instance, filtering by make, model range, specific year, mileage bracket, and price range simultaneously – caused response times to jump significantly. It wasn&rsquo;t about the number of users, but the complexity of certain queries during our rigorous testing cycles.</p>
+<h3 id="this-slowdown-was-a-concern-because">This slowdown was a concern because:</h3>
+<ul>
+<li>It made iterative testing and debugging cycles longer than necessary.</li>
+<li>It could potentially skew perceptions of the platform&rsquo;s viability during internal reviews or demos.</li>
+<li>It hinted at underlying inefficiencies that would become major problems if the PoC moved towards production.</li>
+</ul>
+<h2 id="digging-deep-identifying-the-bottlenecks">Digging Deep: Identifying the Bottlenecks</h2>
+<h3 id="to-pinpoint-the-cause-we-employed-a-few-standard-diagnostic-techniques">To pinpoint the cause, we employed a few standard diagnostic techniques:</h3>
+<ul>
+<li><strong>Profiling</strong>: We used Python&rsquo;s built-in <a href="https://docs.python.org/3/library/profile.html#module-cProfile">cProfile</a> and tools like <a href="https://github.com/benfred/py-spy">py-spy</a> to analyze the execution time of the code within the problematic API endpoints. This helped us see where the application was spending most of its time within the Python code itself.</li>
+<li><strong>Logging &amp; Timing Middleware</strong>: We added simple middleware in FastAPI to log the precise time taken for each request, especially focusing on the slow scenarios identified during testing.</li>
+<li><strong>Database Query Analysis (MongoDB)</strong>: Since we used MongoDB, we heavily utilized the explain() command on the queries generated by our application (likely via an async driver like Motor). This showed us the query execution plan, index usage (or lack thereof), and documents scanned.</li>
+</ul>
+<h3 id="our-investigation-revealed-a-couple-of-key-areas-contributing-to-the-slowdown">Our investigation revealed a couple of key areas contributing to the slowdown:</h3>
+<ul>
+<li><strong>Inefficient Database Queries</strong>: The complex filter combinations often resulted in queries that couldn&rsquo;t effectively use existing indexes, leading to collection scans or inefficient index scans in MongoDB.</li>
+<li><strong>Suboptimal Data Handling in Code</strong>: In some cases, the Python code was fetching more data than necessary from the database and then performing complex filtering or transformations in application memory, which was less efficient than doing it at the database level.</li>
+<li><strong>Serialization Overhead</strong>: For complex results, serializing large Pydantic models into JSON added a noticeable delay, especially when unnecessary fields were included.</li>
+</ul>
+<h2 id="the-fixes-implementing-targeted-optimizations">The Fixes: Implementing Targeted Optimizations</h2>
+<p>Based on our findings, we implemented the following changes, which cumulatively led to the ~35% average performance improvement for those specific problematic scenarios:</p>
+<ol>
+<li>Strategic Database Indexing &amp; Query Refinement (MongoDB):</li>
+</ol>
+<ul>
+<li>
+<p><strong>Issue</strong>: explain() showed that queries combining make, model, year, and price_range weren&rsquo;t using indexes well.</p>
+</li>
+<li>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>We created compound indexes specifically designed to cover the most common complex filter combinations identified during testing. For example: db.cars.create_index([(&ldquo;make&rdquo;, 1), (&ldquo;model&rdquo;, 1), (&ldquo;year&rdquo;, -1), (&ldquo;price&rdquo;, 1)]).</li>
+<li>We refactored our database query logic (using Motor) to leverage MongoDB&rsquo;s aggregation pipeline for some complex filtering/grouping tasks, pushing more work onto the database engine which is optimized for it.</li>
+<li>We explicitly used projections (find({}, {&quot;_id&quot;: 0, &ldquo;name&rdquo;: 1, &ldquo;price&rdquo;: 1, &ldquo;year&rdquo;: 1})) in our queries to ensure we only retrieved the fields actually needed by the API endpoint, reducing data transfer and processing load.</li>
+</ul>
+</li>
+<li>
+<p><strong>Impact</strong>: This was the most significant contributor. Query times for the complex filter scenarios dropped dramatically, often by more than 50% in isolation.</p>
+</li>
+</ul>
+<ol start="2">
+<li>Optimizing Data Processing &amp; Serialization:</li>
+</ol>
+<ul>
+<li>
+<p><strong>Issue</strong>: Profiling showed time spent processing fetched data and serializing large Pydantic models.</p>
+</li>
+<li>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>We reviewed the API logic. Where possible, filtering logic previously done in Python after fetching a broader dataset was pushed down into the optimized database query itself.</li>
+<li>We created specific Pydantic response_model schemas tailored for different API use cases. For the list view endpoint (which was often the slow one with filters), we created a slimmer model containing only essential fields (e.g., CarListModel), distinct from a more detailed CarDetailModel. FastAPI uses this hint to optimize serialization.</li>
+</ul>
+</li>
+<li>
+<p><strong>Impact</strong>: Reduced CPU usage for data manipulation within Python and significantly cut down on JSON serialization time, especially for requests returning multiple items.</p>
+</li>
+</ul>
+<p>(Note: While async I/O is crucial for FastAPI, in this specific PoC scenario, the bottleneck wasn&rsquo;t primarily external I/O blocking, but rather database query and data processing efficiency under complex filter conditions. If external API calls were involved, optimizing them with httpx and async/await would have been another key step.)</p>
+<h2 id="measuring-the-improvement">Measuring the Improvement</h2>
+<p>How did we verify the 35% improvement? Since it was a PoC and the issue appeared under specific test conditions, we focused on benchmarking those scenarios:</p>
+<ul>
+<li><strong>Baseline Tests</strong>: We wrote scripts (using pytest and httpx, or even simple curl loops) to repeatedly hit the API endpoint with the exact filter combinations that we knew were slow, measuring the average response time before optimization.</li>
+<li><strong>Post-Optimization Tests</strong>: We ran the exact same test scripts after implementing the fixes.</li>
+<li><strong>Comparison</strong>: Comparing the &ldquo;before&rdquo; and &ldquo;after&rdquo; average response times for these targeted, complex queries showed an average reduction of approximately 35%.</li>
+</ul>
+<p>We also kept an eye on profiling results and database query explain() outputs to confirm the reasons for the speedup (e.g., better index usage, fewer documents scanned).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Even in a Proof of Concept stage, API performance matters. Discovering and addressing bottlenecks early, as we did during testing, prevents these issues from becoming major roadblocks later. For our FastAPI application, the key lay in deeply analyzing the behavior under specific stressful conditions (complex filters in our case) and applying targeted optimizations, primarily focused on database interaction (indexing, query structure, projections) and efficient data handling/serialization within the application code.</p>
+<p>This iterative process of testing, profiling, optimizing, and re-testing allowed us to achieve that significant 35% performance gain, making our PoC more robust and efficient even before facing real-world traffic.</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/posts/achieving-the-40-reduction-in-page-load-times/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Achieving the 40% Reduction in Page Load Times</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'YOUR_DISQUS_SHORTNAME';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script><div class="giscus mt-24"></div>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="nhistory/blog"
+    data-repo-id="R_kgDOOVvc4g"
+    data-category="General"
+    data-category-id="DIC_kwDOOVvc4s4Co4P4"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Sehwan Dev Blog</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

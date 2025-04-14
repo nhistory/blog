@@ -11,6 +11,9 @@
     <loc>http://localhost:1313/</loc>
     <lastmod>2024-04-07T23:01:07-03:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/how-we-achieved-a-35-api-performance-gain-in-our-poc/</loc>
+    <lastmod>2023-01-13T20:51:45-03:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>

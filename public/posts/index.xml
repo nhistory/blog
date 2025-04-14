@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/posts/achieving-the-40-reduction-in-page-load-times/</guid>
       <description>&lt;h2 id=&#34;initial-problem&#34;&gt;Initial Problem:&lt;/h2&gt;&#xA;&lt;p&gt;The Yeti dashboard, displaying potentially large datasets (the &amp;gt;100k transaction records), suffered from slow initial load times and sluggish interactions. This was due to a combination of large JavaScript bundles, inefficient data fetching, and unoptimized rendering.&lt;/p&gt;&#xA;&lt;h2 id=&#34;actions-taken&#34;&gt;Actions Taken:&lt;/h2&gt;&#xA;&lt;h3 id=&#34;leveraging-nextjs-app-router--server-components&#34;&gt;Leveraging Next.js App Router &amp;amp; Server Components:&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Before: Significant portions of the dashboard might have been rendered client-side, requiring large JS bundles and client-side data fetching (useEffect hooks fetching large amounts of data).&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>How We Achieved a 35% API Performance Gain in Our PoC</title>
+      <link>http://localhost:1313/posts/how-we-achieved-a-35-api-performance-gain-in-our-poc/</link>
+      <pubDate>Fri, 13 Jan 2023 20:51:45 -0300</pubDate>
+      <guid>http://localhost:1313/posts/how-we-achieved-a-35-api-performance-gain-in-our-poc/</guid>
+      <description>&lt;p&gt;Our project was a used car search and comparison platform. Being a PoC, it wasn&amp;rsquo;t yet facing heavy user load. However, during our internal testing and validation phases, we hit a snag: certain API calls were unexpectedly sluggish under specific conditions. This wasn&amp;rsquo;t ideal, even for a PoC, as it hampered testing efficiency and could misrepresent the potential user experience during demos. The goal was clear – we needed to optimize.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
