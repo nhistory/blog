@@ -22,5 +22,12 @@
       <guid>http://localhost:1313/posts/how-we-achieved-a-35-api-performance-gain-in-our-poc/</guid>
       <description>&lt;p&gt;Our project was a used car search and comparison platform. Being a PoC, it wasn&amp;rsquo;t yet facing heavy user load. However, during our internal testing and validation phases, we hit a snag: certain API calls were unexpectedly sluggish under specific conditions. This wasn&amp;rsquo;t ideal, even for a PoC, as it hampered testing efficiency and could misrepresent the potential user experience during demos. The goal was clear – we needed to optimize.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Search</title>
+      <link>http://localhost:1313/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/search/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
